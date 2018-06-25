@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Customer
+    class Alien : Customer
     {
-        public string Name;
-        public int Wallet;
+        public Alien()
+        {
+            this.Name = "Alien";
+            this.Wallet = 5;
+        }
     }
 }

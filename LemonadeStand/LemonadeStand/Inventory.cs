@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Inventory
+    class Inventory : Player
     {
+        public int Amount;
+
+
+        public void DisplayInventory(Player playerOne)
+        {
+            foreach (Inventory I in playerOne.playerInventory)
+            {
+                Console.WriteLine(I.Name + ": " + I.Amount);
+            }
+        }
     }
 }

@@ -8,5 +8,17 @@ namespace LemonadeStand
 {
     class Game
     {
+        public Player playerOne;
+        public Store store;
+
+        public void BuildObjects()
+        {
+            playerOne = new Human();
+            store = new Store();
+            store.EnterStore();
+            Console.ReadLine();
+
+        }
+
     }
 }

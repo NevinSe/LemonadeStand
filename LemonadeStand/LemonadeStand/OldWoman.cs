@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Customer
+    class OldWoman : Customer
     {
-        public string Name;
-        public int Wallet;
+        public OldWoman()
+        {
+            this.Name = "Old Woman";
+            this.Wallet = 5;
+        }
+
     }
 }
