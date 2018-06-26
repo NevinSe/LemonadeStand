@@ -11,11 +11,10 @@ namespace LemonadeStand
     {
         //Stopwatch timerDay = new Stopwatch();
         
-        public void RunDay(Player playerOne, Inventory playerInventory, Customer customer)
+        public void RunDay(Player playerOne, Inventory playerInventory, Customer customer, UserInterface userInterface)
         {
             CreateCustomers(playerOne, playerInventory, customer, 20);
-            Console.WriteLine(playerOne.Money);
-            Console.ReadLine();
+            userInterface.DisplayInventory(playerOne, playerInventory);
         }
 
         public void CreateCustomers(Player playerOne, Inventory playerInventory, Customer customer, int spawnNumber)
@@ -37,25 +36,21 @@ namespace LemonadeStand
                         customer = new OldWoman();
                         SetTolerance(customer, playerInventory);
                         SalesLogic(playerOne, playerInventory, customer);
-                        Console.WriteLine(customer.Name);
                         break;
                     case 2:
                         customer = new YoungMan();
                         SetTolerance(customer, playerInventory);
                         SalesLogic(playerOne, playerInventory, customer);
-                        Console.WriteLine(customer.Name);
                         break;
                     case 3:
                         customer = new Child();
                         SetTolerance(customer, playerInventory);
                         SalesLogic(playerOne, playerInventory, customer);
-                        Console.WriteLine(customer.Name);
                         break;
                     case 4:
                         customer = new Alien();
                         SetTolerance(customer, playerInventory);
                         SalesLogic(playerOne, playerInventory, customer);
-                        Console.WriteLine(customer.Name);
                         break;
                 }
                 System.Threading.Thread.Sleep(10);
@@ -67,6 +62,7 @@ namespace LemonadeStand
             if(customerPerson.BuyLogic() && playerInventory.Cups > 0)
             {
                 playerOne.Money += playerInventory.Wampum;
+                Console.WriteLine("You made a sale! (" + customerPerson.Name + ")");
             }
         }
         public void SalesLogic(Player playerOne, Inventory playerInventory, Customer customerPerson)

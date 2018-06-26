@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace LemonadeStand
@@ -37,7 +38,7 @@ namespace LemonadeStand
             Console.WriteLine("100 Ice: $" + icePrice+"           (Your inventory: " + playerInventory.Ice+")");
             Console.WriteLine("100 Cups: $" + cupsPrice+"         (Your inventory: " + playerInventory.Cups+")");
             Console.WriteLine("Wacky waveing inflatable arm flailing tube man: $" + wackyWavingInflatableArmFlailingTubeMan);
-            Console.WriteLine("\r\nWhich item would you like to purchase?\r\n(or type 'all' to purchase 1 stack of each");
+            Console.WriteLine("\r\nWhich item would you like to purchase?\r\n----(or type 'all' to purchase at once)");
             purchaseItem = Console.ReadLine().Trim().ToLower();
             if (purchaseItem != "quit")
             {
@@ -66,7 +67,11 @@ namespace LemonadeStand
                     playerInventory.Cups += AddToInventory(numberOfStacks, stackOfCups, cupsPrice, playerOne, purchaseItem);
                     break;
                 case "all":
-
+                    playerInventory.Lemons += AddToInventory(numberOfStacks, stackOfLemons, lemonPrice, playerOne, purchaseItem);
+                    playerInventory.Sugar += AddToInventory(numberOfStacks, stackOfSugar, sugarPrice, playerOne, purchaseItem);
+                    playerInventory.Ice += AddToInventory(numberOfStacks, stackOfIce, icePrice, playerOne, purchaseItem);
+                    playerInventory.Cups += AddToInventory(numberOfStacks, stackOfCups, cupsPrice, playerOne, purchaseItem);
+                    break;
                 default:
                     Console.WriteLine("Enter a valid item\r\n");
                     break;
@@ -84,8 +89,11 @@ namespace LemonadeStand
         public void NewPrices()
         {
             lemonPrice = Math.Round(ChangingMarket(lemonPrice, RandomNumber()),2);
+            System.Threading.Thread.Sleep(10);
             cupsPrice = Math.Round(ChangingMarket(cupsPrice, RandomNumber()),2);
+            System.Threading.Thread.Sleep(10);
             sugarPrice = Math.Round(ChangingMarket(sugarPrice, RandomNumber()),2);
+            System.Threading.Thread.Sleep(10);
             icePrice = Math.Round(ChangingMarket(icePrice, RandomNumber()),2);
         }
         public double ChangingMarket(double marketItem, double modifier)

@@ -14,6 +14,7 @@ namespace LemonadeStand
         public int lemonTolerance;
         public int sugarTolerance;
         public int iceTolerance;
+        public int heatTolerance;
 
         public Customer()
         {
@@ -33,6 +34,10 @@ namespace LemonadeStand
         public virtual bool BuyLogic()
         {
             return false;
+        }
+
+        public virtual void HeatTolerance()
+        {
         }
     }
 }

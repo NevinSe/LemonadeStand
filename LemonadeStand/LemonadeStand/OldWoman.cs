@@ -16,6 +16,7 @@ namespace LemonadeStand
 
         public override bool BuyLogic()
         {
+            HeatTolerance();
             bool tasteTolerance;
             bool purchaseTolerance;
             if (sugarTolerance <= lemonTolerance && sugarTolerance >= 2)
@@ -23,7 +24,7 @@ namespace LemonadeStand
                 tasteTolerance = true;
             }
             else tasteTolerance = false;
-            if (wampumTolerance >= Wallet)
+            if (wampumTolerance <= Wallet) 
             {
                 purchaseTolerance = true;
             }
@@ -35,7 +36,18 @@ namespace LemonadeStand
             }
             else return false;
         }
-
-
+        public override void HeatTolerance()
+        {
+            if (heatTolerance < 75)
+            {
+                this.Wallet = 0;
+            }
+            else if (heatTolerance > 85)
+            {
+                this.Wallet = 10;
+            }
+            else
+                this.Wallet = 5;
+        }
     }
 }
