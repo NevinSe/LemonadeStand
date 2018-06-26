@@ -6,19 +6,31 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Game
+    class Game 
     {
-        public Player playerOne;
-        public Store store;
+        protected Player playerOne;
+        public Customer customer;
+        protected Store store;
+        protected Inventory playerInventory;
+        Day day;
+        UserInterface userInterface;
 
-        public void BuildObjects()
+        public Game()
         {
             playerOne = new Human();
             store = new Store();
-            store.EnterStore();
-            Console.ReadLine();
-
+            playerInventory = new Inventory();
+            userInterface = new UserInterface();
+            day = new Day();
         }
+        public void BuildObjects()
+        {
+            store.EnterStore(playerOne, playerInventory);
+            userInterface.SetLemonsPerPitcher(playerInventory);
+            day.RunDay(playerOne, playerInventory, customer);
+            Console.ReadLine();
+        }
+       
 
     }
 }

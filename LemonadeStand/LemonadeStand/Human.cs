@@ -8,10 +8,6 @@ namespace LemonadeStand
 {
     class Human : Player
     {
-        public Human()
-        {
-            
-        }
 
         public override string PromptForName()
         {

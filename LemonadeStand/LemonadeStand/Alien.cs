@@ -11,7 +11,29 @@ namespace LemonadeStand
         public Alien()
         {
             this.Name = "Alien";
-            this.Wallet = 5;
+            this.Wallet = 2;
+        }
+
+        public override bool BuyLogic()
+        {
+            bool tasteTolerance;
+            bool purchaseTolerance;
+            if (sugarTolerance <= lemonTolerance && sugarTolerance >= 2)
+            {
+                tasteTolerance = true;
+            }
+            else tasteTolerance = false;
+            if (wampumTolerance >= Wallet)
+            {
+                purchaseTolerance = true;
+            }
+            else purchaseTolerance = false;
+
+            if (tasteTolerance && purchaseTolerance)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }
