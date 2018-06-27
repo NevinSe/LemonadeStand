@@ -9,6 +9,7 @@ namespace LemonadeStand
     class Inventory
     {
         public double Wampum = 2;
+        public int WWIFATM = 0;
         public int Lemons;
         public int Sugar;
         public int Ice;
@@ -17,7 +18,7 @@ namespace LemonadeStand
         public int FilledCups = 0;
         public int cupsPerPitcher = 6;
         public int lemonsPerPitcher = 4;
-        public int sugarPerPitcher = 4; 
+        public int sugarPerPitcher = 2; 
         public int icePerPitcher = 4;
 
         public Inventory()

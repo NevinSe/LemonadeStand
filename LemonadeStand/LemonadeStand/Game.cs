@@ -16,6 +16,9 @@ namespace LemonadeStand
         Day day;
         
         public static int dayCounter = 0;
+        public static double netProfit;
+        public static double mafiaCut;
+        public static double mafiaCutTotal;
 
         public Game()
         {
@@ -23,20 +26,22 @@ namespace LemonadeStand
             customer = new Customer();
             store = new Store();
             playerInventory = new Inventory();
-            
             weather = new Weather();
             day = new Day();
         }
         public void BuildObjects()
         {
-            weather.DisplayForcast();
+            
             UserInterface.BeginningOfGame();
-            while (dayCounter <= 13)
+            weather.BuildForcast();
+            weather.DisplayForcast();
+            while (dayCounter < UserInterface.gameLength)
             {
                 RunOneDay();
                 dayCounter++;
             }
-            
+            UserInterface.EndOfGameResults(playerOne);
+            Console.ReadLine();
             
             
         }
@@ -49,6 +54,7 @@ namespace LemonadeStand
         public void BuisnessOptions()
         {
             UserInterface.DisplayDayTempurature();
+            UserInterface.MainMenuDisplay();
             string userInput = UserInterface.GetUserChoice();
             switch (userInput)
             {
@@ -63,11 +69,27 @@ namespace LemonadeStand
                 case "open":
                     day.RunDay(playerOne, playerInventory, customer, weather);
                     break;
+                case "weather":
+                    Weather.DisplayRemainingForcast();
+                    BuisnessOptions();
+                    break;
                 default:
                     Console.WriteLine("Enter a valid choice please");
                     BuisnessOptions();
                     break;
             }
+        }
+
+        public static void MafiaCut(Player playerOne, double beginningWapum)
+        {
+            netProfit = playerOne.Money - beginningWapum;
+            if (netProfit >= 10)
+            {
+                mafiaCut = netProfit * 0.35;
+            }
+            else mafiaCut = 15;
+            mafiaCutTotal += mafiaCut; 
+            playerOne.Money -= mafiaCut;
         }
        
 

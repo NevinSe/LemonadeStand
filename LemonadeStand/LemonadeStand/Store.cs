@@ -9,17 +9,18 @@ namespace LemonadeStand
 {
     class Store
     {
-        private double lemonPrice = 0.1;
-        private double icePrice = 0.05;
-        private double cupsPrice = 0.15;
-        private double sugarPrice = 0.1;
+        private double lemonPrice = 0.3;
+        private double icePrice = 0.1;
+        private double cupsPrice = 0.25;
+        private double sugarPrice = 0.2;
         private int stackOfLemons = 10;
         private int stackOfSugar = 5;
-        private int stackOfIce = 100;
-        private int stackOfCups = 100;
-        private double wackyWavingInflatableArmFlailingTubeMan = 10;
+        private int stackOfIce = 50;
+        private int stackOfCups = 50;
+        private double wackyWavingInflatableArmFlailingTubeMan = 20;
         public void EnterStore(Player playerOne, Inventory playerInventory)
         {
+            ResetPrices();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\r\n\t\tWelcome to the store!\r\n\t\tWe sell items at the lowest possible market value!\r\n\t\t(Just don't ask around too much)");
             Console.ResetColor();
@@ -31,18 +32,28 @@ namespace LemonadeStand
             
 
         }
+        public void ResetPrices()
+        {
+            lemonPrice = 0.3;
+            icePrice = 0.15;
+            cupsPrice = 0.25;
+            sugarPrice = 0.2;
+        }
 
         public void DisplayItems(Player playerOne , Inventory playerInventory)
         {
             int numberOfStacks;
             string purchaseItem;
-            Console.WriteLine("\r\nTotal money: "+playerOne.Money+" Wapmum\r\n");
+           
             Console.WriteLine("10 Lemons: " + lemonPrice+" Wampum       (Your inventory: "+playerInventory.Lemons+")");
             Console.WriteLine("5lb Sugar: " + sugarPrice+" Wampum       (Your inventory: " + playerInventory.Sugar+")");
-            Console.WriteLine("100 Ice: " + icePrice+" Wampum           (Your inventory: " + playerInventory.Ice+")");
-            Console.WriteLine("100 Cups: " + cupsPrice+" Wampum         (Your inventory: " + playerInventory.Cups+")");
-            Console.WriteLine("Wacky waveing inflatable arm flailing tube man: " + wackyWavingInflatableArmFlailingTubeMan+" Wampum");
-            Console.WriteLine("\r\nWhich item would you like to purchase?\r\n----(or type 'all' to purchase at once)\r\nEnter 'quit' to leave store");
+            Console.WriteLine("50 Ice: " + icePrice+" Wampum           (Your inventory: " + playerInventory.Ice+")");
+            Console.WriteLine("50 Cups: " + cupsPrice+" Wampum         (Your inventory: " + playerInventory.Cups+")");
+            Console.WriteLine("Wacky waving inflatable arm flailing tube man: " + wackyWavingInflatableArmFlailingTubeMan+" Wampum");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\r\nTotal money: " + playerOne.Money + " Wampum\r\n");
+            Console.ResetColor();
+            Console.WriteLine("\r\nWhich item would you like to purchase?\r\n----(or type 'all' to purchase all ingrediants at once)\r\nEnter 'quit' to leave store");
             purchaseItem = Console.ReadLine().Trim().ToLower();
             if (purchaseItem != "quit")
             {
@@ -70,6 +81,11 @@ namespace LemonadeStand
                 case "cups":
                     playerInventory.Cups += AddToInventory(numberOfStacks, stackOfCups, cupsPrice, playerOne, purchaseItem);
                     break;
+                case "wacky waving inflatable arm flailing tube man":
+                    playerInventory.WWIFATM++;
+                    playerOne.Money -= wackyWavingInflatableArmFlailingTubeMan;
+                    Console.WriteLine("\r\nYou bought Wacky waveing inflatable arm flailing tube man");
+                        break;
                 case "all":
                     playerInventory.Lemons += AddToInventory(numberOfStacks, stackOfLemons, lemonPrice, playerOne, purchaseItem);
                     playerInventory.Sugar += AddToInventory(numberOfStacks, stackOfSugar, sugarPrice, playerOne, purchaseItem);
@@ -84,10 +100,21 @@ namespace LemonadeStand
         }
         public int AddToInventory(int numberOfStacks, int stackOfItem, double itemPrice, Player playerOne, string itemName)
         {
-            int addedValue = stackOfItem * numberOfStacks;
-            playerOne.Money -= lemonPrice * numberOfStacks;
-            Console.WriteLine("\r\nYou added " + (stackOfItem * numberOfStacks) +" "+itemName+" to your inventory\r\nCost: $" + (itemPrice * numberOfStacks) + "\r\n");
-            return addedValue;
+            if (playerOne.Money >= itemPrice * numberOfStacks)
+            {
+                int addedValue = stackOfItem * numberOfStacks;
+                playerOne.Money -= itemPrice * numberOfStacks;
+                Console.WriteLine("\r\nYou added " + (stackOfItem * numberOfStacks) + " " + itemName + " to your inventory\r\nCost: " + (itemPrice * numberOfStacks) + "Wampum\r\n");
+                return addedValue;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Not Enough Wampum!!!!!!");
+                Console.ResetColor();
+                return 0;
+            }
+                
         }
 
         public void NewPrices()

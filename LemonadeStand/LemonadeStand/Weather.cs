@@ -13,7 +13,6 @@ namespace LemonadeStand
         public Weather()
         {
             weatherForcast = new List<int>();
-            BuildForcast();
         }
         public int RandomWeatherGenerator()
         {
@@ -24,7 +23,7 @@ namespace LemonadeStand
 
         public void BuildForcast()
         {
-            for(int i = 0; i<14;i++)
+            for(int i = 0; i<UserInterface.gameLength;i++)
             {
                 weatherForcast.Add(RandomWeatherGenerator());
                 System.Threading.Thread.Sleep(10);
@@ -33,11 +32,35 @@ namespace LemonadeStand
 
         public void DisplayForcast()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\r\nThe weather forcast for the week is as follows:\r\n");
             for(int i = 0;i<weatherForcast.Count;i++)
             {
+                if(i == weatherForcast.Count - 1)
+                {
+                    Console.Write(weatherForcast[i]);
+                }
+                else
                 Console.Write(weatherForcast[i]+", ");
             }
+            Console.WriteLine("\r\n");
+            Console.ResetColor();
+        }
+        public static void DisplayRemainingForcast()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\r\nThe weather forcast for the rest of the week is as follows:\r\n");
+            for (int i = Game.dayCounter+1; i < weatherForcast.Count; i++)
+            {
+                if (i == weatherForcast.Count - 1)
+                {
+                    Console.Write(weatherForcast[i]);
+                }
+                else
+                    Console.Write(weatherForcast[i] + ", ");
+            }
+            Console.WriteLine("\r\n");
+            Console.ResetColor();
         }
     }
 }
