@@ -19,6 +19,7 @@ namespace LemonadeStand
         public static double netProfit;
         public static double mafiaCut;
         public static double mafiaCutTotal;
+        public static double totalNetProfits;
 
         public Game()
         {
@@ -88,7 +89,8 @@ namespace LemonadeStand
                 mafiaCut = netProfit * 0.35;
             }
             else mafiaCut = 15;
-            mafiaCutTotal += mafiaCut; 
+            mafiaCutTotal += mafiaCut;
+            totalNetProfits += netProfit - mafiaCut;
             playerOne.Money -= mafiaCut;
         }
        

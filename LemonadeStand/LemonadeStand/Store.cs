@@ -104,7 +104,9 @@ namespace LemonadeStand
             {
                 int addedValue = stackOfItem * numberOfStacks;
                 playerOne.Money -= itemPrice * numberOfStacks;
-                Console.WriteLine("\r\nYou added " + (stackOfItem * numberOfStacks) + " " + itemName + " to your inventory\r\nCost: " + (itemPrice * numberOfStacks) + "Wampum\r\n");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("\r\nYou added " + (stackOfItem * numberOfStacks) + " " + itemName + " to your inventory\r\nCost: " + (itemPrice * numberOfStacks) + " Wampum\r\n");
+                Console.ResetColor();
                 return addedValue;
             }
             else

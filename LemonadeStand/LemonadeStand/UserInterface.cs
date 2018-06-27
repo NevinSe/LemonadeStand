@@ -44,6 +44,7 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("The local mafia took {0} Wampum from your daily profits for 'Protection'",Game.mafiaCut);
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"The total net profit for your stand so far: {Game.totalNetProfits} Wampum");
             Console.WriteLine("Your total Wampum is: {0}",playerOne.Money);
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
