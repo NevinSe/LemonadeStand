@@ -10,11 +10,13 @@ namespace LemonadeStand
     class Day
     {
         //Stopwatch timerDay = new Stopwatch();
-        
-        public void RunDay(Player playerOne, Inventory playerInventory, Customer customer, UserInterface userInterface)
+        private double beginningWampum;
+        public void RunDay(Player playerOne, Inventory playerInventory, Customer customer, Weather weather)
         {
+            beginningWampum = playerOne.Money;
             CreateCustomers(playerOne, playerInventory, customer, 20);
-            userInterface.DisplayInventory(playerOne, playerInventory);
+            UserInterface.DisplayInventory(playerOne, playerInventory, beginningWampum);
+            playerInventory.Ice = 0;
         }
 
         public void CreateCustomers(Player playerOne, Inventory playerInventory, Customer customer, int spawnNumber)
@@ -30,7 +32,7 @@ namespace LemonadeStand
             Random rng = new Random();
             for (int i = 0; i< spawnNumber; i++)
             {
-                switch(rng.Next(1, 5))
+                switch (rng.Next(1, 5))
                 {
                     case 1:
                         customer = new OldWoman();
@@ -59,19 +61,20 @@ namespace LemonadeStand
         } 
         public void CustomerBuy(Player playerOne , Inventory playerInventory, Customer customerPerson)
         {
-            if(customerPerson.BuyLogic() && playerInventory.Cups > 0)
+            if(customerPerson.BuyLogic(playerInventory) && playerInventory.Cups > 0)
             {
                 playerOne.Money += playerInventory.Wampum;
+                playerInventory.FilledCups--;
                 Console.WriteLine("You made a sale! (" + customerPerson.Name + ")");
             }
         }
         public void SalesLogic(Player playerOne, Inventory playerInventory, Customer customerPerson)
         {
-            if (playerInventory.Pitcher > 0)
+            if (playerInventory.FilledCups > 0)
             {
                 CustomerBuy(playerOne, playerInventory, customerPerson);
             }
-            else if (playerInventory.CanFillPitcher())
+            else if (playerInventory.CanFillPitcher() && playerInventory.FilledCups == 0)
             {
                 playerInventory.FillAPitcher();
                 CustomerBuy(playerOne, playerInventory, customerPerson);
@@ -88,6 +91,7 @@ namespace LemonadeStand
             customerPerson.sugarTolerance = playerInventory.sugarPerPitcher;
             customerPerson.iceTolerance = playerInventory.icePerPitcher;
             customerPerson.wampumTolerance = playerInventory.Wampum;
+            customerPerson.heatTolerance = Weather.weatherForcast[Game.dayCounter];
         }
         //public void SpawnTimer()
         //{

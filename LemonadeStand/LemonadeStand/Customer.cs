@@ -31,13 +31,14 @@ namespace LemonadeStand
             return 5;
         }
 
-        public virtual bool BuyLogic()
+        public virtual bool BuyLogic(Inventory playerInvetory)
         {
             return false;
         }
 
-        public virtual void HeatTolerance()
+        public virtual void HeatTolerance(Inventory playerInvetory)
         {
+
         }
     }
 }

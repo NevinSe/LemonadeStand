@@ -8,15 +8,16 @@ namespace LemonadeStand
 {
     class Inventory
     {
-        public double Wampum;
+        public double Wampum = 2;
         public int Lemons;
         public int Sugar;
         public int Ice;
         public int Cups;
-        public int Pitcher;
-        private int cupsPerPitcher = 6;
+        public int Pitcher = 0;
+        public int FilledCups = 0;
+        public int cupsPerPitcher = 6;
         public int lemonsPerPitcher = 4;
-        public int sugarPerPitcher = 4;
+        public int sugarPerPitcher = 4; 
         public int icePerPitcher = 4;
 
         public Inventory()
@@ -27,21 +28,13 @@ namespace LemonadeStand
             this.Cups = 0;
         }
 
-        public void DisplayInventory(Human player)
-        {
-            Console.WriteLine("Your total money: $"+player.Money+"\r\n");
-            Console.WriteLine("The amount of Lemons you have is: "+Lemons);
-            Console.WriteLine("The amount of Sugar you have is: " + Sugar);
-            Console.WriteLine("The amount of Ice you have is: " + Ice);
-            Console.WriteLine("The amount of Cups you have is: " + Cups);
-        }
-
         public void FillAPitcher()
         {
                 Lemons -= lemonsPerPitcher;
                 Sugar -= sugarPerPitcher;
-                Ice -= icePerPitcher;
+                Ice -= icePerPitcher * cupsPerPitcher;
                 Cups -= cupsPerPitcher;
+                FilledCups = cupsPerPitcher;
                 Pitcher++;
         }
         public bool CanFillPitcher()

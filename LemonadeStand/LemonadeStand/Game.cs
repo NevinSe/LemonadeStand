@@ -14,8 +14,8 @@ namespace LemonadeStand
         protected Store store;
         protected Inventory playerInventory;
         Day day;
-        UserInterface userInterface;
-        private int dayCounter = 0;
+        
+        public static int dayCounter = 0;
 
         public Game()
         {
@@ -23,15 +23,19 @@ namespace LemonadeStand
             customer = new Customer();
             store = new Store();
             playerInventory = new Inventory();
-            userInterface = new UserInterface();
+            
             weather = new Weather();
             day = new Day();
         }
         public void BuildObjects()
         {
             weather.DisplayForcast();
-            userInterface.BeginningOfGame();
-            RunOneDay();
+            UserInterface.BeginningOfGame();
+            while (dayCounter <= 13)
+            {
+                RunOneDay();
+                dayCounter++;
+            }
             
             
             
@@ -39,17 +43,13 @@ namespace LemonadeStand
 
         public void RunOneDay()
         {
-            while(dayCounter < 13)
-            {
-                customer.heatTolerance = weather.weatherForcast[dayCounter];
                 BuisnessOptions();
-            }
-            
         }
 
         public void BuisnessOptions()
         {
-            string userInput = userInterface.GetUserChoice();
+            UserInterface.DisplayDayTempurature();
+            string userInput = UserInterface.GetUserChoice();
             switch (userInput)
             {
                 case "store":
@@ -57,12 +57,11 @@ namespace LemonadeStand
                     BuisnessOptions();
                     break;
                 case "recipe":
-                    userInterface.SetLemonsPerPitcher(playerInventory);
-                    store.EnterStore(playerOne, playerInventory);
+                    UserInterface.SetLemonsPerPitcher(playerInventory);
                     BuisnessOptions();
                     break;
                 case "open":
-                    day.RunDay(playerOne, playerInventory, customer);
+                    day.RunDay(playerOne, playerInventory, customer, weather);
                     break;
                 default:
                     Console.WriteLine("Enter a valid choice please");

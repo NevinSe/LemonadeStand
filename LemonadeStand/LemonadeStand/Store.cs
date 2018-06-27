@@ -20,8 +20,12 @@ namespace LemonadeStand
         private double wackyWavingInflatableArmFlailingTubeMan = 10;
         public void EnterStore(Player playerOne, Inventory playerInventory)
         {
-            Console.WriteLine("\r\nWelcome to the store!\r\nWe sell items at the lowest possible market value!\r\n(Just don't ask around too much)");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\r\n\t\tWelcome to the store!\r\n\t\tWe sell items at the lowest possible market value!\r\n\t\t(Just don't ask around too much)");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("\r\nThe current market price of all our items are as follows:");
+            Console.ResetColor();
             NewPrices();
             DisplayItems(playerOne, playerInventory);
             
@@ -32,13 +36,13 @@ namespace LemonadeStand
         {
             int numberOfStacks;
             string purchaseItem;
-            Console.WriteLine("Total money: $"+playerOne.Money+"\r\n");
-            Console.WriteLine("10 Lemons: $" + lemonPrice+"       (Your inventory: "+playerInventory.Lemons+")");
-            Console.WriteLine("5lb Sugar: $" + sugarPrice+"       (Your inventory: " + playerInventory.Sugar+")");
-            Console.WriteLine("100 Ice: $" + icePrice+"           (Your inventory: " + playerInventory.Ice+")");
-            Console.WriteLine("100 Cups: $" + cupsPrice+"         (Your inventory: " + playerInventory.Cups+")");
-            Console.WriteLine("Wacky waveing inflatable arm flailing tube man: $" + wackyWavingInflatableArmFlailingTubeMan);
-            Console.WriteLine("\r\nWhich item would you like to purchase?\r\n----(or type 'all' to purchase at once)");
+            Console.WriteLine("\r\nTotal money: "+playerOne.Money+" Wapmum\r\n");
+            Console.WriteLine("10 Lemons: " + lemonPrice+" Wampum       (Your inventory: "+playerInventory.Lemons+")");
+            Console.WriteLine("5lb Sugar: " + sugarPrice+" Wampum       (Your inventory: " + playerInventory.Sugar+")");
+            Console.WriteLine("100 Ice: " + icePrice+" Wampum           (Your inventory: " + playerInventory.Ice+")");
+            Console.WriteLine("100 Cups: " + cupsPrice+" Wampum         (Your inventory: " + playerInventory.Cups+")");
+            Console.WriteLine("Wacky waveing inflatable arm flailing tube man: " + wackyWavingInflatableArmFlailingTubeMan+" Wampum");
+            Console.WriteLine("\r\nWhich item would you like to purchase?\r\n----(or type 'all' to purchase at once)\r\nEnter 'quit' to leave store");
             purchaseItem = Console.ReadLine().Trim().ToLower();
             if (purchaseItem != "quit")
             {

@@ -9,7 +9,7 @@ namespace LemonadeStand
 {
     class Weather
     {
-        public List<int> weatherForcast;
+        static public List<int> weatherForcast;
         public Weather()
         {
             weatherForcast = new List<int>();
@@ -33,6 +33,7 @@ namespace LemonadeStand
 
         public void DisplayForcast()
         {
+            Console.WriteLine("\r\nThe weather forcast for the week is as follows:\r\n");
             for(int i = 0;i<weatherForcast.Count;i++)
             {
                 Console.Write(weatherForcast[i]+", ");

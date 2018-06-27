@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class UserInterface
+    static class UserInterface
     {
-        public void BeginningOfGame()
+        public static void BeginningOfGame()
         {
-            Console.WriteLine("\r\nWelcome to Lemonade Stand!!");
-            Console.WriteLine("Please enter the number of days you wish to remain open:\r\n(7 days, 14 days, 16 days,");
+            Console.WriteLine("\r\n\r\n\tWelcome to Lemonade Stand!!");
+            Console.WriteLine("\tPlease enter the number of days you wish to remain open:\r\n\t(7 days, 14 days)");
             string gameLength = Console.ReadLine();
 
         }
 
-        public void SetLemonsPerPitcher(Inventory playerInventory)
+        public static void SetLemonsPerPitcher(Inventory playerInventory)
         {
             Console.WriteLine("Please enter how many Lemons per pitcher (defualt 4 lemons)");
             playerInventory.lemonsPerPitcher=int.Parse(Console.ReadLine().Trim());
@@ -28,22 +28,30 @@ namespace LemonadeStand
             playerInventory.Wampum = double.Parse(Console.ReadLine().Trim());
         }
 
-        public string GetUserChoice()
+        public static string GetUserChoice()
         {
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("Enter:\r\n'store' to visit shop\r\n'recipe' to change lemonade recipe\r\n'open' to begin the day");
             string userInput = Console.ReadLine().Trim().ToLower();
             return userInput;
         }
-        public void DisplayInventory(Player playerOne, Inventory playerInventory)
+        public static void DisplayInventory(Player playerOne, Inventory playerInventory, double beginningWapum)
         {
-            Console.WriteLine(playerOne.Money);
-            Console.WriteLine(playerInventory.Lemons);
-            Console.WriteLine(playerInventory.Sugar);
-            Console.WriteLine(playerInventory.Ice);
-            Console.WriteLine(playerInventory.Cups);
+            double netProfit = playerOne.Money - beginningWapum;
+            Console.WriteLine("\r\nYou Made {0} Wampum today!",netProfit);
+            Console.WriteLine("Your total Wampum is : {0}",playerOne.Money);
+            Console.WriteLine("Lemons left {0}",playerInventory.Lemons);
+            Console.WriteLine("Sugar left {0}lb", playerInventory.Sugar);
+            Console.WriteLine("{0} ice cubes melted", playerInventory.Ice);
+            Console.WriteLine("Cups left {0}", playerInventory.Cups);
             Console.ReadLine();
         }
+
+        public static void DisplayDayTempurature()
+        {
+            Console.WriteLine("\r\nToday's tempurature is {0}\r\n", Weather.weatherForcast[Game.dayCounter]);
+        }
+
 
 
     }

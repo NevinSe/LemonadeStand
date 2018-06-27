@@ -14,21 +14,29 @@ namespace LemonadeStand
             this.Wallet = 5;
         }
 
-        public override bool BuyLogic()
+        public override bool BuyLogic(Inventory playerInvetory)
         {
-            HeatTolerance();
+            HeatTolerance(playerInvetory);
             bool tasteTolerance;
             bool purchaseTolerance;
             if (sugarTolerance <= lemonTolerance && sugarTolerance >= 2)
             {
                 tasteTolerance = true;
             }
-            else tasteTolerance = false;
+            else
+            {
+                Console.WriteLine("-------------------{0} says: Tastes Gross!", this.Name);
+                tasteTolerance = false;
+            }
             if (wampumTolerance <= Wallet) 
             {
                 purchaseTolerance = true;
             }
-            else purchaseTolerance = false;
+            else
+            {
+                Console.WriteLine("-------------------{0} says: Too Expensive!", this.Name);
+                purchaseTolerance = false;
+            }
 
             if (tasteTolerance && purchaseTolerance)
             {
@@ -36,13 +44,17 @@ namespace LemonadeStand
             }
             else return false;
         }
-        public override void HeatTolerance()
+        public override void HeatTolerance(Inventory playerInvetory)
         {
             if (heatTolerance < 75)
             {
                 this.Wallet = 0;
             }
-            else if (heatTolerance > 85)
+            else if (heatTolerance > 85 && playerInvetory.icePerPitcher >= 2)
+            {
+                this.Wallet = 7;
+            }
+            else if (heatTolerance > 95 && playerInvetory.icePerPitcher >= 4)
             {
                 this.Wallet = 10;
             }
