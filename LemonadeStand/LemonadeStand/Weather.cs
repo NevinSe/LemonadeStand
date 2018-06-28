@@ -33,7 +33,7 @@ namespace LemonadeStand
         public void DisplayForcast()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\r\nThe weather forcast for the week is as follows:\r\n");
+            Console.WriteLine("\r\nThe weather foercast for the week is as follows:\r\n");
             for(int i = 0;i<weatherForcast.Count;i++)
             {
                 if(i == weatherForcast.Count - 1)
@@ -46,10 +46,10 @@ namespace LemonadeStand
             Console.WriteLine("\r\n");
             Console.ResetColor();
         }
-        public static void DisplayRemainingForcast()
+        public static void DisplayRemainingForecast()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\r\nThe weather forcast for the rest of the week is as follows:\r\n");
+            Console.WriteLine("\r\nThe weather forecast for the rest of the week is as follows:\r\n");
             for (int i = Game.dayCounter+1; i < weatherForcast.Count; i++)
             {
                 if (i == weatherForcast.Count - 1)

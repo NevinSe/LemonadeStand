@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Threading.Tasks;
 
 namespace LemonadeStand
@@ -11,8 +12,18 @@ namespace LemonadeStand
         public static int gameLength;
         public static void BeginningOfGame()
         {
-            Console.WriteLine("\r\n\r\n\tWelcome to Lemonade Stand!!");
-            Console.WriteLine("\tPlease enter the number of days you wish to remain open:\r\n\t(7 days, 14 days)");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("\r\n\r\n\tWelcome");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" to");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(" Lemonade");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" Stand");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("!!!");
+            Console.ResetColor();
+            Console.WriteLine("\r\n\tPlease enter the number of days you wish to remain open:\r\n\t(7 days, 14 days)");
             gameLength = int.Parse(Console.ReadLine().Trim());
 
         }
@@ -31,8 +42,13 @@ namespace LemonadeStand
 
         public static string GetUserChoice()
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine("Enter:\r\n'store' to visit shop\r\n'recipe' to change lemonade recipe\r\n'open' to begin the day\r\n'weather' to display the weather forcast");
+            Console.ForegroundColor = ConsoleColor.Magenta; Console.Write("\r\n'store'"); Console.ForegroundColor = ConsoleColor.White; Console.Write(" to visit shop");
+            Console.ForegroundColor = ConsoleColor.Magenta; Console.Write("\r\n'recipe'"); Console.ForegroundColor = ConsoleColor.White; Console.Write(" to change lemonade recipe");
+            Console.ForegroundColor = ConsoleColor.Magenta; Console.Write("\r\n'weather'"); Console.ForegroundColor = ConsoleColor.White; Console.Write(" to display the weather forcast for remaining days");
+            Console.ForegroundColor = ConsoleColor.Magenta; Console.Write("\r\n'open'"); Console.ForegroundColor = ConsoleColor.White; Console.Write(" to begin the day\r\n");
+            Console.ResetColor();
             string userInput = Console.ReadLine().Trim().ToLower();
             return userInput;
         }
@@ -81,7 +97,6 @@ namespace LemonadeStand
             Console.WriteLine("\t-MAIN MENU-");
             Console.ResetColor();
         }
-
 
 
     }

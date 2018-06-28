@@ -14,7 +14,6 @@ namespace LemonadeStand
         protected Store store;
         protected Inventory playerInventory;
         Day day;
-        
         public static int dayCounter = 0;
         public static double netProfit;
         public static double mafiaCut;
@@ -32,7 +31,6 @@ namespace LemonadeStand
         }
         public void BuildObjects()
         {
-            
             UserInterface.BeginningOfGame();
             weather.BuildForcast();
             weather.DisplayForcast();
@@ -71,7 +69,7 @@ namespace LemonadeStand
                     day.RunDay(playerOne, playerInventory, customer, weather);
                     break;
                 case "weather":
-                    Weather.DisplayRemainingForcast();
+                    Weather.DisplayRemainingForecast();
                     BuisnessOptions();
                     break;
                 default:
