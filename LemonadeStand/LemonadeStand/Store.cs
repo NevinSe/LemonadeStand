@@ -54,11 +54,32 @@ namespace LemonadeStand
             Console.WriteLine("\r\nTotal money: " + playerOne.Money + " Wampum\r\n");
             Console.ResetColor();
             Console.WriteLine("\r\nWhich item would you like to purchase?\r\n----(or type 'all' to purchase all ingrediants at once)\r\nEnter 'quit' to leave store");
-            purchaseItem = Console.ReadLine().Trim().ToLower();
+            try
+            {
+                purchaseItem = Console.ReadLine().Trim().ToLower();
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Enter a valid Choice");
+                Console.ResetColor();
+                DisplayItems(playerOne, playerInventory);
+                purchaseItem = "quit";
+            }
             if (purchaseItem != "quit")
             {
                 Console.WriteLine("How many stacks would you like to buy?");
-                numberOfStacks = int.Parse(Console.ReadLine().Trim());
+                try
+                {
+                    numberOfStacks = int.Parse(Console.ReadLine().Trim());
+                }
+                catch
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Set stacks to 1 due to invalid choice");
+                    Console.ResetColor();
+                    numberOfStacks = 1;
+                }
                 PurchaseItem(purchaseItem, numberOfStacks, playerInventory, playerOne);
             }
            
@@ -93,7 +114,9 @@ namespace LemonadeStand
                     playerInventory.Cups += AddToInventory(numberOfStacks, stackOfCups, cupsPrice, playerOne, purchaseItem);
                     break;
                 default:
-                    Console.WriteLine("Enter a valid item\r\n");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\r\nEnter a valid item\r\n");
+                    Console.ResetColor();
                     break;
             }
             DisplayItems(playerOne, playerInventory);

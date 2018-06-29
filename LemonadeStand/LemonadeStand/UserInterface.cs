@@ -24,7 +24,19 @@ namespace LemonadeStand
             Console.Write("!!!");
             Console.ResetColor();
             Console.WriteLine("\r\n\tPlease enter the number of days you wish to remain open:\r\n\t(7 days, 14 days)");
-            gameLength = int.Parse(Console.ReadLine().Trim());
+            try
+            {
+                gameLength = int.Parse(Console.ReadLine().Trim());
+
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Game Length set to 7 because invalid int was entered");
+                Console.ResetColor();
+                gameLength = 7;
+
+            }
 
         }
 
